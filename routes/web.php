@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,25 +15,29 @@ use App\Http\Controllers\CompaniesController;
 |
 */
 
-Route::redirect('/', '/companies');
+Route::redirect('/', '/home');
 
-Route::get('/get_data_companies',[CompaniesController::class, 'viewDataPaginates']);
-Route::post('/delete-companies',[CompaniesController::class, 'viewDetail']);
-Route::post('/add-companies',[CompaniesController::class, 'viewDetail']);
-
-Route::post('/add-employees',[CompaniesController::class, 'viewDetail']);
-Route::post('/delete-employees',[CompaniesController::class, 'viewDetail']);
+Route::post('/api/get_data_companies',[CompaniesController::class, 'viewDataPaginates']);
+Route::post('/api/delete_companies',[CompaniesController::class, 'deleteCompanies']);
+Route::post('/api/add_companies',[CompaniesController::class, 'addCompanies']);
+Route::post('/api/get_count_data_companies',[CompaniesController::class, 'getCountCompanies']);
 
 
-Route::get('/test',function(){
+Route::post('/api/get_data_employees',[EmployeesController::class, 'viewDataPaginates']);
+Route::post('/api/delete_employees',[EmployeesController::class, 'deleteEmployees']);
+Route::post('/api/add_employees',[EmployeesController::class, 'addEmployees']);
+Route::post('/api/get_count_data_employees',[EmployeesController::class, 'getCountEmployees']);
 
-});
 
+
+Route::get('/home',function(){
+    return view('home');
+})->name('home');
 
 Route::get('/companies',function(){
     return view('companies');
-})->name('companies');;
+})->name('companies');
 
 Route::get('/employees',function(){
     return view('employees');
-})->name('employees');;
+})->name('employees');

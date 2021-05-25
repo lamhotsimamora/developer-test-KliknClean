@@ -8,7 +8,7 @@
      <!-- Bootstrap CSS -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title> Employees| Developer Test KlikNClean</title>
+    <title> Home | Developer Test KlikNClean</title>
 
    
     {{-- vue js --}}
@@ -16,9 +16,6 @@
 
     {{-- library ajax buatan sendiri --}}
      <script src="{{ asset('storage/_asset_/js/jnet.js') }}"></script>
-
-      {{-- library buatan sendiri --}}
-      <script src="{{ asset('storage/_asset_/js/garuda.js') }}"></script>
 
      {{-- sweet alert --}}
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -35,8 +32,8 @@
 
 
     <div class="container">
-        <div id="employees" class="card" v-cloak>
-            <h5 class="text-center"><strong>Data Employees</strong></h5>
+        <div id="companies" class="card" v-cloak>
+            <h5 class="text-center"><strong>Data Companies</strong></h5>
             <span class="badge bg-light text-dark"><strong>Total : @{{ total_data }}</strong></span>
             <hr>
             <div class="card-body">
@@ -48,21 +45,21 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Fullname</th>
-                        <th scope="col">Company</th>
-                        <th scope="col">Department</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
                         <th scope="col">@</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(employees,i) in data_employees">
+                      <tr v-for="(companies,i) in data_companies">
                         <th scope="row">@{{ i+1 }}</th>
-                        <td>@{{ employees.fullname }}</td>
-                        <td>@{{ employees.company_id }}</td>
-                        <td>@{{ employees.department }}</td>
-                        <td>@{{ employees.email  }}</td>
-                        <td><button @click="deleteData(employees.employees_id )" type="button" class="btn btn-danger btn-sm">x</button></td>
+                        <td>@{{ companies.company_name }}</td>
+                        <td>@{{ companies.company_email }}</td>
+                        <td>@{{ companies.company_address }}</td>
+                        <td>@{{ companies.company_phone }}</td>
+                        <td><button @click="deleteData(companies.company_id)" type="button" class="btn btn-danger btn-sm">x</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -78,35 +75,27 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Employees</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add New Companies</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+          <div class="container">
+            <div class="card-body">
 
-        <div class="alert alert-danger" role="alert" v-if="show_alert">
-         Email is not valid
-        </div>
-         
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Name</span>
-                <input type="text" @keypress="enterSearch" v-model="name" placeholder="..." class="form-control" aria-label="Name" aria-describedby="basic-addon1" ref="name">
-              </div>
+                <label for="_name" class="form-label">Name</label>
+                <input type="text" v-model="name" class="form-control" ref="name">
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Email</span>
-                <input type="text" @keypress="enterSearch" v-model="email" placeholder="..." class="form-control" aria-label="Email" aria-describedby="basic-addon1" ref="email">
-              </div>
+                <label for="_email" class="form-label">Email</label>
+                <input type="email" v-model="email" class="form-control" ref="email">
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Address</span>
-                <input type="text" @keypress="enterSearch" v-model="address" placeholder="..." class="form-control" aria-label="Address" aria-describedby="basic-addon1" ref="address">
-              </div>
+                <label for="_address" class="form-label">Address</label>
+                <input type="text" v-model="address" class="form-control" ref="address">
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Phone</span>
-                <input type="text" @keypress="enterSearch" v-model="phone" placeholder="..." class="form-control" aria-label="Phone" aria-describedby="basic-addon1" ref="phone">
-              </div>
-              
+                <label for="_phone" class="form-label">Phone</label>
+                <input type="text" v-model="phone" class="form-control" ref="phone">
+                
+            </div>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -127,7 +116,7 @@
 
 {{--  application js --}}
 <script src="{{ asset('storage/js/init.js') }}" defer></script>
-<script src="{{ asset('storage/js/employees.js') }}" defer></script>
+<script src="{{ asset('storage/js/companies.js') }}" defer></script>
 
 
 <!-- Bootstrap UI JS -->

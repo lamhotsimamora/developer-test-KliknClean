@@ -11,4 +11,7 @@ class companies extends Model
 
     protected $table = 'Companies';
     protected $primaryKey = 'company_id';
+    public $timestamps = true;
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'update_at';
 }

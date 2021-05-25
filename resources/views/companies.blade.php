@@ -9,6 +9,25 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <title> Companies| Developer Test KlikNClean</title>
+
+   
+    {{-- vue js --}}
+    <script src="{{ asset('storage/_asset_/js/vue.js') }}"></script>
+
+    {{-- library ajax buatan sendiri --}}
+     <script src="{{ asset('storage/_asset_/js/jnet.js') }}"></script>
+
+      {{-- library buatan sendiri --}}
+      <script src="{{ asset('storage/_asset_/js/garuda.js') }}"></script>
+
+     {{-- sweet alert --}}
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <style>
+      [v-cloak] {
+          display: none;
+      }
+  </style>
 </head>
 <body>
 
@@ -16,50 +35,100 @@
 
 
     <div class="container">
-        <div class="card">
-
-            <h5 class="text-center">Data Companies</h5>
-
+        <div id="companies" class="card" v-cloak>
+            <h5 class="text-center"><strong>Data Companies</strong></h5>
+            <span class="badge bg-light text-dark"><strong>Total : @{{ total_data }}</strong></span>
+            <hr>
             <div class="card-body">
-          @foreach ($data as $companies)
-              {{ $data['company_id'] }}
-          @endforeach
-
-
                   {{-- tabel --}}
-                  <table class="table">
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal_add_data" class="btn btn-primary">+</button>
+                    <br><br>
+                  <div class="table-responsive">
+                  <table class="table table-dark">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">@</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
+                      <tr v-for="(companies,i) in data_companies">
+                        <th scope="row">@{{ i+1 }}</th>
+                        <td>@{{ companies.company_name }}</td>
+                        <td>@{{ companies.company_email }}</td>
+                        <td>@{{ companies.company_address }}</td>
+                        <td>@{{ companies.company_phone }}</td>
+                        <td><button @click="deleteData(companies.company_id)" type="button" class="btn btn-danger btn-sm">x</button></td>
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                   {{-- tabel --}}
             </div>
         </div>    
     </div>
+    
+
+    {{-- modal add data --}}
+<div v-cloak class="modal fade" id="modal_add_data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Companies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="alert alert-danger" role="alert" v-if="show_alert">
+         Email is not valid
+        </div>
+         
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Name</span>
+                <input type="text" @keypress="enterSearch" v-model="name" placeholder="..." class="form-control" aria-label="Name" aria-describedby="basic-addon1" ref="name">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                <input type="text" @keypress="enterSearch" v-model="email" placeholder="..." class="form-control" aria-label="Email" aria-describedby="basic-addon1" ref="email">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Address</span>
+                <input type="text" @keypress="enterSearch" v-model="address" placeholder="..." class="form-control" aria-label="Address" aria-describedby="basic-addon1" ref="address">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Phone</span>
+                <input type="text" @keypress="enterSearch" v-model="phone" placeholder="..." class="form-control" aria-label="Phone" aria-describedby="basic-addon1" ref="phone">
+              </div>
+              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button @click="addData" type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+   {{-- modal add data --}}
+
+    <script>
+
+      // get token from laravel
+      const $token  = '{{ csrf_token() }}';
+      const $URL_SERVER = '{{ url('/') }}';
+
+    </script>
+
+{{--  application js --}}
+<script src="{{ asset('storage/js/init.js') }}" defer></script>
+<script src="{{ asset('storage/js/companies.js') }}" defer></script>
+
 
 <!-- Bootstrap UI JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
