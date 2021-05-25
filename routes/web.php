@@ -21,12 +21,15 @@ Route::post('/api/get_data_companies',[CompaniesController::class, 'viewDataPagi
 Route::post('/api/delete_companies',[CompaniesController::class, 'deleteCompanies']);
 Route::post('/api/add_companies',[CompaniesController::class, 'addCompanies']);
 Route::post('/api/get_count_data_companies',[CompaniesController::class, 'getCountCompanies']);
+Route::post('/api/get_full_data_companies',[CompaniesController::class, 'getFullDataCompanies']);
 
 
 Route::post('/api/get_data_employees',[EmployeesController::class, 'viewDataPaginates']);
 Route::post('/api/delete_employees',[EmployeesController::class, 'deleteEmployees']);
 Route::post('/api/add_employees',[EmployeesController::class, 'addEmployees']);
 Route::post('/api/get_count_data_employees',[EmployeesController::class, 'getCountEmployees']);
+
+Route::post('/api/get_data_report',[CompaniesController::class, 'getDataReportEmployees']);
 
 
 

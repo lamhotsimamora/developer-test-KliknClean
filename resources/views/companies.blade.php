@@ -104,7 +104,7 @@
 
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Phone</span>
-                <input type="text" @keypress="enterSearch" v-model="phone" placeholder="..." class="form-control" aria-label="Phone" aria-describedby="basic-addon1" ref="phone">
+                <input type="number" @keypress="enterSearch" v-model="phone" placeholder="..." class="form-control" aria-label="Phone" aria-describedby="basic-addon1" ref="phone">
               </div>
               
       </div>

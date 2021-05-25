@@ -32,35 +32,28 @@
 
 
     <div class="container">
-        <div id="companies" class="card" v-cloak>
-            <h5 class="text-center"><strong>Data Companies</strong></h5>
+        <div id="report" class="card" v-cloak>
+            <h5 class="text-center"><strong>Data Report</strong></h5>
             <span class="badge bg-light text-dark"><strong>Total : @{{ total_data }}</strong></span>
             <hr>
             <div class="card-body">
                   {{-- tabel --}}
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal_add_data" class="btn btn-primary">+</button>
-                    <br><br>
+                
                   <div class="table-responsive">
                   <table class="table table-dark">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">@</th>
+                        <th scope="col">Company Name</th>
+                        <th scope="col">Total Employees</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(companies,i) in data_companies">
+                      <tr v-for="(report,i) in data_report">
                         <th scope="row">@{{ i+1 }}</th>
-                        <td>@{{ companies.company_name }}</td>
-                        <td>@{{ companies.company_email }}</td>
-                        <td>@{{ companies.company_address }}</td>
-                        <td>@{{ companies.company_phone }}</td>
-                        <td><button @click="deleteData(companies.company_id)" type="button" class="btn btn-danger btn-sm">x</button></td>
-                      </tr>
+                        <td>@{{ report.company_name }}</td>
+                        <td>@{{ report.total_employees }}</td>
+                        </tr>
                     </tbody>
                   </table>
                   </div>
@@ -69,42 +62,6 @@
         </div>    
     </div>
     
-
-    {{-- modal add data --}}
-<div v-cloak class="modal fade" id="modal_add_data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Companies</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <div class="container">
-            <div class="card-body">
-
-                <label for="_name" class="form-label">Name</label>
-                <input type="text" v-model="name" class="form-control" ref="name">
-
-                <label for="_email" class="form-label">Email</label>
-                <input type="email" v-model="email" class="form-control" ref="email">
-
-                <label for="_address" class="form-label">Address</label>
-                <input type="text" v-model="address" class="form-control" ref="address">
-
-                <label for="_phone" class="form-label">Phone</label>
-                <input type="text" v-model="phone" class="form-control" ref="phone">
-                
-            </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button @click="addData" type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-   {{-- modal add data --}}
 
     <script>
 
@@ -116,7 +73,7 @@
 
 {{--  application js --}}
 <script src="{{ asset('storage/js/init.js') }}" defer></script>
-<script src="{{ asset('storage/js/companies.js') }}" defer></script>
+<script src="{{ asset('storage/js/home.js') }}" defer></script>
 
 
 <!-- Bootstrap UI JS -->

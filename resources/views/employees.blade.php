@@ -49,7 +49,7 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Fullname</th>
-                        <th scope="col">Company</th>
+                        <th scope="col">Company Name</th>
                         <th scope="col">Department</th>
                         <th scope="col">Email</th>
                         <th scope="col">@</th>
@@ -59,7 +59,7 @@
                       <tr v-for="(employees,i) in data_employees">
                         <th scope="row">@{{ i+1 }}</th>
                         <td>@{{ employees.fullname }}</td>
-                        <td>@{{ employees.company_id }}</td>
+                        <td><a href="#">@{{ employees.company_name }}</a></td>
                         <td>@{{ employees.department }}</td>
                         <td>@{{ employees.email  }}</td>
                         <td><button @click="deleteData(employees.employees_id )" type="button" class="btn btn-danger btn-sm">x</button></td>
@@ -88,23 +88,22 @@
         </div>
          
               <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Name</span>
-                <input type="text" @keypress="enterSearch" v-model="name" placeholder="..." class="form-control" aria-label="Name" aria-describedby="basic-addon1" ref="name">
+                <span class="input-group-text" id="basic-addon1">Fullname</span>
+                <input type="text" @keypress="enterSearch" v-model="fullname" placeholder="..." class="form-control" aria-label="Fullname" aria-describedby="basic-addon1" ref="fullname">
+              </div>
+
+              <select v-model="companies" class="form-select" aria-label="Default select example">
+                <option v-for="companies in data_companies" :value="companies.company_id">@{{ companies.company_name }}</option>
+              </select> <br>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Department</span>
+                <input type="text" @keypress="enterSearch" v-model="department" placeholder="..." class="form-control" aria-label="Department" aria-describedby="basic-addon1" ref="department">
               </div>
 
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Email</span>
                 <input type="text" @keypress="enterSearch" v-model="email" placeholder="..." class="form-control" aria-label="Email" aria-describedby="basic-addon1" ref="email">
-              </div>
-
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Address</span>
-                <input type="text" @keypress="enterSearch" v-model="address" placeholder="..." class="form-control" aria-label="Address" aria-describedby="basic-addon1" ref="address">
-              </div>
-
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Phone</span>
-                <input type="text" @keypress="enterSearch" v-model="phone" placeholder="..." class="form-control" aria-label="Phone" aria-describedby="basic-addon1" ref="phone">
               </div>
               
       </div>

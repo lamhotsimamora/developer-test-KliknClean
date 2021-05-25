@@ -18,13 +18,13 @@ class EmployeesController extends Controller
         if ($client_token == $token_server){    
             if ($request->accepts(['text/html', 'application/json'])) {
 
-                    $Companies = new Employees;
-                    $Companies->company_name = $request->_name;
-                    $Companies->company_email = $request->_email;
-                    $Companies->company_address = $request->_address;
-                    $Companies->company_phone = $request->_phone;
+                    $Employees = new Employees;
+                    $Employees->company_id = $request->_company_id;
+                    $Employees->fullname = $request->_fullname;
+                    $Employees->email = $request->_email;
+                    $Employees->department = $request->_department;
 
-                    return  $Companies->save() ? response()->json([
+                    return  $Employees->save() ? response()->json([
                         'result'=>true
                     ]) : response()->json([
                         'result' => false,
@@ -76,12 +76,13 @@ class EmployeesController extends Controller
     public function viewDataPaginates(Request $request){
         $client_token = $request->_token;
         $token_server      = csrf_token();
+
         
         if ($client_token == $token_server){    
             if ($request->accepts(['text/html', 'application/json'])) {
                 return response()->json([
                     'result' => true,
-                    'data' => Employees::paginate(5)
+                    'data' => DB::table('view_employees')->select('*')->paginate(5)
                 ]);
             }else{
                 return response()->json([

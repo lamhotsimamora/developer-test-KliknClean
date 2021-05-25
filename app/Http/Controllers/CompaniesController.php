@@ -73,6 +73,30 @@ class CompaniesController extends Controller
         }
     }
 
+    public function getFullDataCompanies(Request $request){
+        $client_token = $request->_token;
+        $token_server      = csrf_token();
+        
+        if ($client_token == $token_server){    
+            if ($request->accepts(['text/html', 'application/json'])) {
+                return response()->json([
+                    'result' => true,
+                    'data' =>  Companies::all('company_id','company_name')
+                ]);
+            }else{
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Request is not application/json'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Token is not valid'
+            ]);
+        }
+    }
+
     public function viewDataPaginates(Request $request){
         $client_token = $request->_token;
         $token_server      = csrf_token();
@@ -127,4 +151,28 @@ class CompaniesController extends Controller
         return Companies::all();
     }
 
+    public function getDataReportEmployees(Request $request){
+        $client_token = $request->_token;
+        $token_server = csrf_token();
+
+        
+        if ($client_token == $token_server){    
+            if ($request->accepts(['text/html', 'application/json'])) {
+                return response()->json([
+                    'result' => true,
+                    'data' =>DB::table('view_report_employees')->get()
+                ]);
+            }else{
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Request is not application/json'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Token is not valid'
+            ]);
+        }
+    }
 }
