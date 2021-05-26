@@ -43,6 +43,11 @@
                   {{-- tabel --}}
                   <button type="button" data-bs-toggle="modal" data-bs-target="#modal_add_data" class="btn btn-primary">+ Add New</button>
                     <br><br>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">Search</span>
+                      <input ref="search_company_name" v-model="search_company_name" @keypress="enterSearchCompanyName" type="text" class="form-control" placeholder="Company Name" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+
                   <div class="table-responsive">
                   <table class="table table-dark">
                     <thead>
