@@ -34,8 +34,7 @@
     <div class="container">
         <div id="report" class="card" v-cloak>
             <h5 class="text-center"><strong>Data Report</strong></h5>
-            <span class="badge bg-light text-dark"><strong>Total : @{{ total_data }}</strong></span>
-            <hr>
+          
             <div class="card-body">
                   {{-- tabel --}}
                 
@@ -52,7 +51,7 @@
                       <tr v-for="(report,i) in data_report">
                         <th scope="row">@{{ i+1 }}</th>
                         <td>@{{ report.company_name }}</td>
-                        <td>@{{ report.total_employees }}</td>
+                        <td><a data-bs-toggle="modal" data-bs-target="#modal_view_employees" href="#" @click="loadDataEmployees(report.company_id,report.company_name)">@{{ report.total_employees }} Orang</a></td>
                         </tr>
                     </tbody>
                   </table>
@@ -61,6 +60,37 @@
             </div>
         </div>    
     </div>
+
+      {{-- modal view employees --}}
+<div v-cloak class="modal fade" id="modal_view_employees" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Data employees in @{{ company_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+     
+
+        <ol class="list-group list-group-numbered">
+          <li v-for="employees in data_employees" class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">@{{ employees.fullname }}</div>
+              @{{ employees.email}}
+            </div>
+            <span class="badge bg-primary rounded-pill"><small>@{{ employees.department }}</small></span>
+          </li>
+        </ol>
+              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+   {{-- modal add data --}}
     
 
     <script>

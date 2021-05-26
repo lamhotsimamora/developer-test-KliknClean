@@ -82,7 +82,33 @@ class EmployeesController extends Controller
             if ($request->accepts(['text/html', 'application/json'])) {
                 return response()->json([
                     'result' => true,
-                    'data' => DB::table('view_employees')->select('*')->paginate(5)
+                    'data' => DB::table('view_employees')->paginate(5)
+                ]);
+            }else{
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Request is not application/json'
+                ]);
+            }
+        }else{
+            return response()->json([
+                'result' => false,
+                'message' => 'Token is not valid'
+            ]);
+        }
+    }
+
+    public function getDataEmployeesByCompany(Request $request){
+        $client_token = $request->_token;
+        $token_server = csrf_token();
+        $company_id = $request->_company_id;
+         
+
+        if ($client_token == $token_server){    
+            if ($request->accepts(['text/html', 'application/json'])) {
+                return response()->json([
+                    'result' => true,
+                    'data' => Employees::where('company_id',$company_id)->get()
                 ]);
             }else{
                 return response()->json([

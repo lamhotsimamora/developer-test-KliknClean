@@ -30,6 +30,7 @@ Route::post('/api/add_employees',[EmployeesController::class, 'addEmployees']);
 Route::post('/api/get_count_data_employees',[EmployeesController::class, 'getCountEmployees']);
 
 Route::post('/api/get_data_report',[CompaniesController::class, 'getDataReportEmployees']);
+Route::post('/api/get_data_employees_by_company',[EmployeesController::class, 'getDataEmployeesByCompany']);
 
 
 

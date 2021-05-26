@@ -41,13 +41,13 @@
             <hr>
             <div class="card-body">
                   {{-- tabel --}}
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal_add_data" class="btn btn-primary">+</button>
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal_add_data" class="btn btn-primary">+ Add New</button>
                     <br><br>
                   <div class="table-responsive">
                   <table class="table table-dark">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Address</th>
@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                       <tr v-for="(companies,i) in data_companies">
-                        <th scope="row">@{{ i+1 }}</th>
+                        <th scope="row">@{{ companies.company_id }}</th>
                         <td>@{{ companies.company_name }}</td>
                         <td>@{{ companies.company_email }}</td>
                         <td>@{{ companies.company_address }}</td>
@@ -68,6 +68,20 @@
                   </table>
                   </div>
                   {{-- tabel --}}
+                  <hr>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" @click="firstPageGo()" href="#">First</a></li>
+                      <li class="page-item"><a class="page-link" @click="prevPageGo()" href="#">Previous</a></li>
+                      <li v-for="(btn_number_page,i) in data_btn_number_page" class="page-item"><a :data="btn_number_page.url"  class="page-link" @click="pageNumberGo($event)" href="#">
+                        @{{i=i+1 }}</a></li>
+                      <li class="page-item"><a class="page-link" @click="nextPageGo()" href="#">Next</a></li>
+                      <li class="page-item"><a class="page-link" @click="lastPageGo()" href="#">Last</a></li>
+                    </ul>
+                  </nav>
+
+                  
+                    
             </div>
         </div>    
     </div>
