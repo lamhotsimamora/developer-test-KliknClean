@@ -17,33 +17,33 @@ use App\Http\Controllers\EmployeesController;
 
 Route::redirect('/', '/home');
 
-Route::post('/api/get_data_companies',[CompaniesController::class, 'getDataCompaniesPaginate']);
-Route::post('/api/delete_companies',[CompaniesController::class, 'deleteCompanies']);
-Route::post('/api/add_companies',[CompaniesController::class, 'addCompanies']);
-Route::post('/api/get_count_data_companies',[CompaniesController::class, 'getCountCompanies']);
-Route::post('/api/get_full_data_companies',[CompaniesController::class, 'getFullDataCompanies']);
-Route::post('/api/search_data_companies',[CompaniesController::class, 'searchDataCompanies']);
+Route::post('/api/get_data_companies', [CompaniesController::class, 'getDataCompaniesPaginate']);
+Route::post('/api/delete_companies', [CompaniesController::class, 'deleteCompanies']);
+Route::post('/api/add_companies', [CompaniesController::class, 'addCompanies']);
+Route::post('/api/get_count_data_companies', [CompaniesController::class, 'getCountCompanies']);
+Route::post('/api/get_full_data_companies', [CompaniesController::class, 'getFullDataCompanies']);
+Route::post('/api/search_data_companies', [CompaniesController::class, 'searchDataCompanies']);
 
 
-Route::post('/api/get_data_employees',[EmployeesController::class, 'getDataCompaniesEmployees']);
-Route::post('/api/delete_employees',[EmployeesController::class, 'deleteEmployees']);
-Route::post('/api/add_employees',[EmployeesController::class, 'addEmployees']);
-Route::post('/api/get_count_data_employees',[EmployeesController::class, 'getCountEmployees']);
-Route::post('/api/search_data_employees',[EmployeesController::class, 'searchDataEmployees']);
+Route::post('/api/get_data_employees', [EmployeesController::class, 'getDataCompaniesEmployees']);
+Route::post('/api/delete_employees', [EmployeesController::class, 'deleteEmployees']);
+Route::post('/api/add_employees', [EmployeesController::class, 'addEmployees']);
+Route::post('/api/get_count_data_employees', [EmployeesController::class, 'getCountEmployees']);
+Route::post('/api/search_data_employees', [EmployeesController::class, 'searchDataEmployees']);
 
-Route::post('/api/get_data_report',[CompaniesController::class, 'getDataReportEmployees']);
-Route::post('/api/get_data_employees_by_company',[EmployeesController::class, 'getDataEmployeesByCompany']);
+Route::post('/api/get_data_report', [CompaniesController::class, 'getDataReportEmployees']);
+Route::post('/api/get_data_employees_by_company', [EmployeesController::class, 'getDataEmployeesByCompany']);
 
 
 
-Route::get('/home',function(){
+Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/companies',function(){
+Route::get('/companies', function () {
     return view('companies');
 })->name('companies');
 
-Route::get('/employees',function(){
+Route::get('/employees', function () {
     return view('employees');
 })->name('employees');
